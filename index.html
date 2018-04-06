@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Nested Lists Plugin</title>
+	<!-- Stylesheet -->
+	<link rel="stylesheet" href="style.css">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+	<!-- jQuery & jQuery UI & jQuery TouchPunch -->
+	<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
+	<script src="vendors/jquery.ui.touch-punch.min.js"></script>
+</head>
+<body>
+
+	<div class="wrapper">
+		<div class="left-side">
+			<ul class="list" id="mylist">
+				<li class="list-item">
+					<div class="item">
+						<span>Item</span>
+					</div>
+				</li>
+				<li class="list-item">
+					<div class="item">
+						<span>Item</span>
+					</div>
+				</li>
+				<li class="list-item">
+					<div class="item">
+						<span>Item</span>
+					</div>
+				</li>
+				<li class="list-item">
+					<div class="item">
+						<span>Item</span>
+					</div>
+				</li>
+				<li class="list-item">
+					<div class="item">
+						<span>Item</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+		<div class="right-side">
+			<ul class="list">
+				<li class="list-item">
+					<div class="item">
+						<span>Item</span>
+					</div>
+				</li>
+				<li class="list-item">
+					<div class="item">
+						<span>Item</span>
+					</div>
+				</li>
+				<li class="list-item">
+					<div class="item">
+						<span>Item</span>
+					</div>
+				</li>
+				<li class="list-item">
+					<div class="item">
+						<span>Item</span>
+					</div>
+				</li>
+				<li class="list-item">
+					<div class="item">
+						<span>Item</span>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+
+
+	<!-- Plugin Script -->
+	<script src="js/jquery.drag-drop-nested-lists.plugin.js" type="text/javascript" charset="utf-8" async defer></script>
+	<script>
+		$( document ).ready(function() {
+			$('#mylist').dndnl();
+		});	
+	</script>
+</body>
+</html>
