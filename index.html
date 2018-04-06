@@ -11,13 +11,15 @@
 	<!-- jQuery & jQuery UI & jQuery TouchPunch -->
 	<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 	<script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
-	<script src="vendors/jquery.ui.touch-punch.min.js"></script>
+	<script src="vendors/jquery.ui.touch-punch.js"></script>
+	<!-- plugin -->
+	<script src="js/jquery.drag-drop-nested-lists.plugin.js"></script>
 </head>
 <body>
 
 	<div class="wrapper">
 		<div class="left-side">
-			<ul class="list" id="mylist">
+			<ul class="list tested-list">
 				<li class="list-item">
 					<div class="item">
 						<span>Item</span>
@@ -46,7 +48,7 @@
 			</ul>
 		</div>
 
-		<div class="right-side">
+		<div class="right-side another-list">
 			<ul class="list">
 				<li class="list-item">
 					<div class="item">
@@ -79,11 +81,10 @@
 
 
 
-	<!-- Plugin Script -->
-	<script src="js/jquery.drag-drop-nested-lists.plugin.js" type="text/javascript" charset="utf-8" async defer></script>
+	
 	<script>
-		$( document ).ready(function() {
-			$('#mylist').dndnl();
+		$(document).ready(function() {
+			$('.tested-list').dndnl();
 		});	
 	</script>
 </body>
