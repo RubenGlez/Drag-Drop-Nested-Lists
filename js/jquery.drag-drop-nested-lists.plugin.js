@@ -48,7 +48,8 @@
                     revert: "invalid",
                     scroll: true,
                     cursor: "crosshair",
-                    zIndex: 100
+                    zIndex: 100,
+                    appendTo: "body"
                 })
                 .on( "dragstart", methods.dragStart )
                 .on( "drag", methods.drag )
@@ -73,19 +74,20 @@
             }else{
                 $movingEl = $(ui.helper);
             }
+
+            $(this).closest('.list-item').addClass('.item-dragged');
         },
 
         drag: function(event, ui) {},
 
         dragStop: function(event, ui) {
-            //console.log(event);
+            $(this).closest('.list-item').removeClass('.item-dragged');
         },
 
 
         // Drop events
 
         drop: function(event, ui) {        
-
             // append item
             $(this).after( $('<li class="list-item"></li>').append($movingEl) );
 
@@ -103,11 +105,17 @@
                 .on("drop", methods.drop)
                 .on("dropover", methods.dropOver)
                 .on("dropout", methods.dropOut);
+
+            $(this).removeClass('item-hovered');
         },
 
-        dropOver: function(event, ui) {},
+        dropOver: function(event, ui) {
+            $(this).addClass('item-hovered');
+        },
 
-        dropOut: function(event, ui) {},
+        dropOut: function(event, ui) {
+            $(this).removeClass('item-hovered');
+        },
     };
 
 
