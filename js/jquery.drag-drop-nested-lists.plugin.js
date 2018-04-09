@@ -1,10 +1,35 @@
 (function($) {
     var defaultOptions = {
         clone: true,
-        dragFrom: ["tested-list", "another-list"],
         dropTo: ["tested-list", "another-list"]
     };
 
+
+
+    // Status during drag & drop
+    var $movingEl = null;
+    var $parentList = null;
+
+
+
+    // Private methods
+    function cloningItems(list){
+        if (list.data("options").clone == true) {
+            return "clone";
+        }else{
+            return "original";
+        }
+    }
+
+    function deleteEmptyItems(){
+        var $emptyEls = $('.list-item');
+
+        $emptyEls.each(function(){      
+            if ( this.children.length == 0 ) {
+                this.remove();
+            }
+        });
+    }
 
 
 
@@ -13,49 +38,76 @@
         init: function(options) {
             options = $.extend({}, defaultOptions, options);
 
+            // Assign data to list
+            this.data("options", options);
+
+            // Make items draggable
             this.find('.item')
-                .draggable()
+                .draggable({
+                    helper: cloningItems(this),
+                    revert: "invalid",
+                    scroll: true,
+                    cursor: "crosshair",
+                    zIndex: 100
+                })
                 .on( "dragstart", methods.dragStart )
                 .on( "drag", methods.drag )
-                .on( "dragstop", methods.dragStop );
+                .on( "dragstop", methods.dragStop );     
 
-                /*
-                .droppable()
-                .on( "dropover", methods.dropOver )
-                .on( "drop", methods.drop )
-                .on( "dropout", methods.dropOut );
-                */                
+            // Make items droppable
+            var droppableLists = this.data("options").dropTo;
+            droppableLists.forEach(function(valor){
+                $('ul.'+valor+' .list-item').droppable()
+                    .on("drop", methods.drop)
+                    .on("dropover", methods.dropOver)
+                    .on("dropout", methods.dropOut);
+            });   
         },
         
 
         // Drag events
 
         dragStart: function(event, ui) {
-            console.log("inicia el drag");
+            if ($(this).closest('.list').data("options").clone == true) {
+                $movingEl = $(ui.helper).clone();
+            }else{
+                $movingEl = $(ui.helper);
+            }
         },
 
-        drag: function(event, ui) {
-            console.log("durante el drag");
-        },
+        drag: function(event, ui) {},
 
         dragStop: function(event, ui) {
-            console.log("termina el drag");
+            //console.log(event);
         },
 
 
         // Drop events
 
-        dropOver: function(event, ui) {
-            console.log("drop sobre");
+        drop: function(event, ui) {        
+
+            // append item
+            $(this).after( $('<li class="list-item"></li>').append($movingEl) );
+
+            // remove styles for items
+            $movingEl.css({
+                top: 0,
+                left: 0
+            });
+
+            // delete empty items
+            deleteEmptyItems();
+
+            // make droppable again
+            $(ui.draggable).closest('.list-item').droppable()
+                .on("drop", methods.drop)
+                .on("dropover", methods.dropOver)
+                .on("dropout", methods.dropOut);
         },
 
-        drop: function(event, ui) {
-            console.log("drop");
-        },
+        dropOver: function(event, ui) {},
 
-        dropOut: function(event, ui) {
-            console.log("drop out");
-        }
+        dropOut: function(event, ui) {},
     };
 
 

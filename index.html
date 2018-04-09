@@ -22,34 +22,47 @@
 			<ul class="list tested-list">
 				<li class="list-item">
 					<div class="item">
-						<span>Item</span>
+						<span>Perro</span>
 					</div>
 				</li>
 				<li class="list-item">
 					<div class="item">
-						<span>Item</span>
+						<span>Gato</span>
+					</div>
+
+					<!--<ul class="sub-list">
+						<li class="list-item">
+							<div class="item">
+								<span>Conejo</span>
+							</div>
+						</li>
+						<li class="list-item">
+							<div class="item">
+								<span>Raton</span>
+							</div>
+						</li>
+					</ul>-->
+				</li>
+				<li class="list-item">
+					<div class="item">
+						<span>Ciervo</span>
 					</div>
 				</li>
 				<li class="list-item">
 					<div class="item">
-						<span>Item</span>
+						<span>Cabra</span>
 					</div>
 				</li>
 				<li class="list-item">
 					<div class="item">
-						<span>Item</span>
-					</div>
-				</li>
-				<li class="list-item">
-					<div class="item">
-						<span>Item</span>
+						<span>Hipopotamo</span>
 					</div>
 				</li>
 			</ul>
 		</div>
 
-		<div class="right-side another-list">
-			<ul class="list">
+		<div class="right-side">
+			<ul class="list another-list">
 				<li class="list-item">
 					<div class="item">
 						<span>Item</span>
@@ -84,7 +97,10 @@
 	
 	<script>
 		$(document).ready(function() {
-			$('.tested-list').dndnl();
+			$('.tested-list').dndnl({
+				clone: false,
+				dropTo: ['tested-list', 'another-list']
+			});
 		});	
 	</script>
 </body>
